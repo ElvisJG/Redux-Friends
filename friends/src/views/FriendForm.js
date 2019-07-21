@@ -29,7 +29,7 @@ class FriendForm extends Component {
   render() {
     const { name, age, email } = this.state;
     return (
-      <form className='add-friend-form' onSubmit={this.handleSubmit}>
+      <form className='friend-form' onSubmit={this.handleSubmit}>
         <input
           name='name'
           type='text'
@@ -51,7 +51,9 @@ class FriendForm extends Component {
           value={email}
           onChange={this.handleChange}
         />
-        <button type='submit'>Add New Friend</button>
+        <button type='submit' className='submit-friend'>
+          Add New Friend
+        </button>
       </form>
     );
   }

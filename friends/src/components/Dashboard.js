@@ -21,14 +21,19 @@ class App extends Component {
     console.log('PROPS:', this.props);
     return (
       <>
-        {this.props.fetching ? (
-          <p>Loading Friends...</p>
-        ) : (
-          <FriendsList friends={this.props.friends} />
-        )}
-        <button type='button' onClick={this.logout}>
-          Logout
-        </button>
+        <h1 className='friend-title'>Welcome Back</h1>
+        <div className='dashboard-container'>
+          {this.props.fetching ? (
+            <p className='loading-friends'>Loading Friends...</p>
+          ) : (
+            <>
+              <FriendsList friends={this.props.friends} />
+              <button type='button' onClick={this.logout} className='logout'>
+                Logout
+              </button>
+            </>
+          )}
+        </div>
       </>
     );
   }

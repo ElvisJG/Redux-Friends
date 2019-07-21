@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 import friendsReducer from './reducers/friendsReducer';
 
 import App from './components/App';
-import './index.css';
+import './scss/index.scss';
 
 const logger = store => next => action => {
   console.log('Prev State', store.getState());

@@ -6,7 +6,7 @@ import FriendForm from './FriendForm';
 export default class FriendsList extends Component {
   render() {
     return (
-      <ul>
+      <ul class='friends-container'>
         {this.props.friends.map(friend => {
           return <Friend key={friend.name} friend={friend} />;
         })}
