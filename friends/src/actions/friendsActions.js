@@ -1,4 +1,5 @@
 import axios from 'axios';
+import useAuth from '../useAuth';
 
 export const LOGIN_START = 'LOGIN_START';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -8,6 +9,7 @@ export const GET_ACCOUNT_SUCCESS = 'GET_ACCOUNT_SUCCESS';
 export const GET_ACCOUNT_FAILED = 'GET_ACCOUNT_FAILED';
 export const ADDING_FRIEND = 'ADDING_FRIEND';
 export const ADD_FRIEND = 'ADD_FRIEND';
+export const ADD_FRIEND_FAILED = 'ADD_FRIEND_FAILED';
 export const DELETING_FRIEND = 'DELETING_FRIEND';
 export const DELETE_FRIEND = 'DELETE_FRIEND';
 
@@ -15,7 +17,7 @@ export function login(username, password) {
   return dispatch => {
     dispatch({ type: LOGIN_START });
 
-    return axios
+    return useAuth()
       .post('http://localhost:5000/api/login', { username, password })
       .then(res => {
         console.log('RES-DATA:', res.data);
@@ -33,13 +35,8 @@ export function getAccount() {
   return dispatch => {
     dispatch({ type: GET_ACCOUNT_START });
 
-    const headers = {
-      Authorization: localStorage.getItem('token'),
-      'Content-Type': 'application/json'
-    };
-
-    axios
-      .get('http://localhost:5000/api/friends', { headers })
+    return useAuth()
+      .get('http://localhost:5000/api/friends')
       .then(res => {
         dispatch({ type: GET_ACCOUNT_SUCCESS, payload: res.data });
       })
@@ -52,14 +49,13 @@ export function addFriend(friend) {
   return dispatch => {
     dispatch({ type: ADDING_FRIEND });
 
-    const headers = {
-      Authorization: localStorage.getItem('token'),
-      'Content-Type': 'application/json'
-    };
-    axios
-      .post('http://localhost:5000/api/friends', friend, { headers })
+    return useAuth()
+      .post('http://localhost:5000/api/friends', friend)
       .then(res => {
         dispatch({ type: ADD_FRIEND, payload: res.data });
+      })
+      .catch(err => {
+        dispatch({ type: ADD_FRIEND_FAILED, payload: err.response.data });
       });
   };
 }

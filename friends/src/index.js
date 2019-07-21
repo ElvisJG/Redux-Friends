@@ -8,6 +8,7 @@ import friendsReducer from './reducers/friendsReducer';
 
 import App from './components/App';
 import './scss/index.scss';
+import useToken from './useToken';
 
 const logger = store => next => action => {
   console.log('Prev State', store.getState());
@@ -23,7 +24,7 @@ const store = createStore(
   // compose multiple middleware flows together into one flow
   compose(
     // our custom middleware
-    applyMiddleware(thunk, logger),
+    applyMiddleware(thunk, logger, useToken),
     // redux dev tools middleware
     window.__REDUX_DEVTOOLS_EXTENSION__
       ? window.__REDUX_DEVTOOLS_EXTENSION__()

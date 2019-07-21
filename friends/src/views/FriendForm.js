@@ -35,6 +35,7 @@ class FriendForm extends Component {
           type='text'
           placeholder='Name'
           value={name}
+          required
           onChange={this.handleChange}
         />
         <input
@@ -42,6 +43,7 @@ class FriendForm extends Component {
           type='number'
           placeholder='Age'
           value={age}
+          required
           onChange={this.handleChange}
         />
         <input
@@ -49,6 +51,7 @@ class FriendForm extends Component {
           type='text'
           placeholder='Email'
           value={email}
+          required
           onChange={this.handleChange}
         />
         <button type='submit' className='submit-friend'>
